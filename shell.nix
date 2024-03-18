@@ -11,10 +11,29 @@ let
 
   pkgs = orig_pkgs.extend rust-overlay;
 
-in pkgs.mkShell {
+in 
+
+pkgs.mkShell rec {
+  nativeBuildInputs = [
+    pkgs.pkg-config
+  ];
+
   buildInputs = [ 
     pkgs.rust-bin.nightly.latest.default
     pkgs.rust-analyzer
     pkgs.pkg-config
+
+     # # x11 game related pkgs
+     # libGL
+     # udev
+     # alsa-lib
+     # vulkan-loader
+     # libxkbcommon
+     # xorg.libX11
+     # xorg.libXcursor
+     # xorg.libXi
+     # xorg.libXrandr
   ];
+
+  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
 }
