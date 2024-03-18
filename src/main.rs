@@ -16,27 +16,27 @@ fn main() {
         return;
     }
 
-    // `direnv allow` in the new directory
-    std::process::Command::new("direnv")
-        .current_dir(dir)
-        .args(["allow"])
-        .spawn()
-        .expect("Failed to direnv allow");
-
     // Execute `cargo init` in the new directory
-    std::process::Command::new("nix-shell")
+    let _ = std::process::Command::new("nix-shell")
         .args([
             "-p",
             "cargo",
             "--quiet",
             "--run",
-            &format!("cargo init {}", dir.to_str().unwrap()),
+            &format!("cargo init --quiet {}", dir.to_str().unwrap()),
         ])
-        .spawn()
+        .output()
         .expect("Failed to cargo init");
 
     // Write the wanted files into the new project
     let _ = std::fs::write(dir.join(".envrc"), ENVRC);
     let _ = std::fs::write(dir.join("shell.nix"), SHELLNIX);
     let _ = std::fs::write(dir.join(".gitignore"), GITIGNORE);
+
+    // `direnv allow` in the new directory
+    std::process::Command::new("direnv")
+        .current_dir(dir)
+        .args(["allow"])
+        .spawn()
+        .expect("Failed to direnv allow");
 }
