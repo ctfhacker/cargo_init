@@ -11,7 +11,7 @@ fn main() {
     let dir = Path::new(&dir);
 
     if std::fs::create_dir_all(dir).is_err() {
-        println!("ERROR: Directory already exists: {dir:?}");
+        println!("ERROR: Directory already exists");
         return;
     }
 
@@ -22,15 +22,15 @@ fn main() {
         .current_dir(dir)
         .args(["allow"])
         .spawn()
-        .expect(&format!("Failed to direnv allow in {dir:?}"));
+        .expect("Failed to direnv allow");
 
     std::process::Command::new("nix-shell")
         .args([
             "-p",
             "cargo",
             "--run",
-            "cargo init ./macroquad_breakout_juicing",
+            &format!("cargo init {}", dir.to_str().unwrap()),
         ])
         .spawn()
-        .expect(&format!("Failed to cargo init in {dir:?}"));
+        .expect("Failed to cargo init");
 }

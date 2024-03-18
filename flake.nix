@@ -17,7 +17,7 @@
           pname = "cargo_init";
           version = "0.1.0";
           src = ./.;
-          cargoSha256 = "0000000000000000000000000000000000000000000000000000"; # Replace this with the actual hash
+          cargoSha256 = "sha256-0WMGBzoFVoXZwL7Y7KGA+FVK+19bgLD2P7u/Tm31N3o="; # Replace this with the actual hash
           buildInputs = [ ]; # Add dependencies here
         };
       in
