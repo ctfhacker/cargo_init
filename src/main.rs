@@ -1,4 +1,3 @@
-use std::io::Write;
 use std::path::Path;
 
 fn main() {
@@ -29,6 +28,7 @@ fn main() {
         .args([
             "-p",
             "cargo",
+            "--quiet",
             "--run",
             &format!("cargo init {}", dir.to_str().unwrap()),
         ])
