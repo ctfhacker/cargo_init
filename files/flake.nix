@@ -35,7 +35,7 @@
 
               packages = [
                 # Python
-                (python311.withPackages (ps: with ps; [
+                (python312.withPackages (ps: with ps; [
                   virtualenv 
                   pip 
                   ipython
