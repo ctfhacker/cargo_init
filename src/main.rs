@@ -2,7 +2,7 @@ use std::path::Path;
 
 fn main() {
     const ENVRC: &'static str = include_str!("../.envrc");
-    const SHELLNIX: &'static str = include_str!("../shell.nix");
+    const FLAKENIX: &'static str = include_str!("../files/flake.nix");
     const GITIGNORE: &'static str = include_str!("../.gitignore");
 
     let dir = std::env::args()
@@ -30,7 +30,7 @@ fn main() {
 
     // Write the wanted files into the new project
     let _ = std::fs::write(dir.join(".envrc"), ENVRC);
-    let _ = std::fs::write(dir.join("shell.nix"), SHELLNIX);
+    let _ = std::fs::write(dir.join("flake.nix"), FLAKENIX);
     let _ = std::fs::write(dir.join(".gitignore"), GITIGNORE);
 
     // `direnv allow` in the new directory
