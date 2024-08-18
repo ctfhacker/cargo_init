@@ -25,8 +25,8 @@
         };
 
         myrust = pkgs.rust-bin.nightly.latest.default.override {
-          extensions = [ "rust-src "]
-          targets = []
+          extensions = [ "rust-src "];
+          targets = [];
         };
       in
         with pkgs; {
@@ -50,18 +50,18 @@
               shellHook = ''
                 # Install binaryninja into a local virtual envirionment
                 # If the virtual environment has not been created, create it
-                if [ ! -d "./.venv" ]; then
-                  BINJA=$(readlink $(which binaryninja))
-                  BINJA_PATH=$(dirname $BINJA)/..
+                # if [ ! -d "./.venv" ]; then
+                #   BINJA=$(readlink $(which binaryninja))
+                #   BINJA_PATH=$(dirname $BINJA)/..
 
-                  python3 -m venv ./.venv;
-                  source ./.venv/bin/activate;
+                #   python3 -m venv ./.venv;
+                #   source ./.venv/bin/activate;
 
-                  python3 $BINJA_PATH/opt/scripts/install_api.py --install-on-pyenv
-                else
-                  # If the virtual environment exists, use it
-                  source ./.venv/bin/activate
-                fi
+                #   python3 $BINJA_PATH/opt/scripts/install_api.py --install-on-pyenv
+                # else
+                #   # If the virtual environment exists, use it
+                #   source ./.venv/bin/activate
+                # fi
               '';
             };
           });
